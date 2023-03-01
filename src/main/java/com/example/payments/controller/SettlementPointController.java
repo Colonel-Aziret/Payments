@@ -31,7 +31,7 @@ public class SettlementPointController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Void> update(
+    public ResponseEntity<String> update(
             @RequestHeader("UUID") UUID uuid,
             @RequestBody SettlementPoint settlementPoint) {
 
@@ -46,7 +46,7 @@ public class SettlementPointController {
         boolean success = settlementPointService.update(settlementPoint);
 
         if (success) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body("Точка расчета успешно изменена");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -59,7 +59,7 @@ public class SettlementPointController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<Void> deletePoint(@RequestHeader("UUID") UUID uuid,
+    public ResponseEntity<String> deletePoint(@RequestHeader("UUID") UUID uuid,
                                             @RequestBody SettlementPoint settlementPoint) {
         if (!uuid.equals(settlementPoint.getPointId())) {
             return ResponseEntity.badRequest().build();
@@ -67,7 +67,7 @@ public class SettlementPointController {
 
         try {
             settlementPointService.delete(settlementPoint.getPointId());
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.OK).body("Точка расчета успешно удалена");
         } catch (SettlementPointNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
