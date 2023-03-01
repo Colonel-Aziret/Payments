@@ -23,7 +23,7 @@ public class Operation {
     private Long id;
 
     @JoinColumn(name = "point_id", referencedColumnName = "pointId")
-    private String pointId;
+    private UUID pointId;
 
     @Column(name = "date")
     private Date date;

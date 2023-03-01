@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Data
 public class OperationDTO {
-    private String pointId;
+    private UUID pointId;
     private Date date;
     private Double sum;
     private String currency;

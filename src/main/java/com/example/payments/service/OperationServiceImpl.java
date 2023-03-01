@@ -62,4 +62,8 @@ public class OperationServiceImpl implements OperationService {
         }
         return createdOperationDTOs;
     }
+
+    public List<Operation> getAllOperations() {
+        return operationRepository.findAll();
+    }
 }
