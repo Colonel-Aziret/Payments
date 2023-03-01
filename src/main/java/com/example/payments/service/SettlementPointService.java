@@ -10,8 +10,11 @@ import java.util.UUID;
 
 public interface SettlementPointService {
     UUID save(SettlementPointDTO settlementPointDTO);
+
     boolean update(SettlementPoint settlementPoint);
+
     SettlementPoint findById(UUID pointId) throws SettlementPointNotFoundException;
+
     void delete(UUID pointId) throws SettlementPointNotFoundException;
 
 }

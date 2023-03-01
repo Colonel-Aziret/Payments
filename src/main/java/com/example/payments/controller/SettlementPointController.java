@@ -60,7 +60,7 @@ public class SettlementPointController {
 
     @PostMapping("/delete")
     public ResponseEntity<String> deletePoint(@RequestHeader("UUID") UUID uuid,
-                                            @RequestBody SettlementPoint settlementPoint) {
+                                              @RequestBody SettlementPoint settlementPoint) {
         if (!uuid.equals(settlementPoint.getPointId())) {
             return ResponseEntity.badRequest().build();
         }

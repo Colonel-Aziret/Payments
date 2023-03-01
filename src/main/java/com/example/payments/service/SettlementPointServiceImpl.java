@@ -18,19 +18,11 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     @Autowired
     SettlementPointRepository settlementPointRepository;
 
-    //    @Autowired
-//    SettlementPointMapper settlementPointMapper;
     private ModelMapper modelMapper = new ModelMapper();
 
     public SettlementPoint convertToEntity(SettlementPointDTO settlementPointDTO) {
         return modelMapper.map(settlementPointDTO, SettlementPoint.class);
     }
-
-
-//    public SettlementPoint saveSettlementPoint(SettlementPointDTO settlementPointDTO) {
-//        SettlementPoint settlementPoint = settlementPointMapper.toModel(settlementPointDTO);
-//        return settlementPointRepository.save(settlementPoint);
-//    }
 
 
     public UUID save(SettlementPointDTO settlementPointDTO) {
@@ -76,6 +68,4 @@ public class SettlementPointServiceImpl implements SettlementPointService {
         SettlementPoint existingPoint = findById(pointId);
         settlementPointRepository.delete(existingPoint);
     }
-
-
 }
