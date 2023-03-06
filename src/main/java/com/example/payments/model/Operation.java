@@ -51,5 +51,9 @@ public class Operation {
 
     @Column(name = "payment_type")
     private Integer paymentType;
+
+    public Object getKey(Object any) {
+        return any;
+    }
 }
 

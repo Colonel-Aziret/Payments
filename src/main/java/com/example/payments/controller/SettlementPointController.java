@@ -1,10 +1,12 @@
 package com.example.payments.controller;
 
 import com.example.payments.dto.SettlementPointDTO;
+import com.example.payments.encrypt.RequestEncryptor;
 import com.example.payments.exception.SettlementPointNotFoundException;
 import com.example.payments.model.SettlementPoint;
 import com.example.payments.repository.SettlementPointRepository;
 import com.example.payments.service.SettlementPointService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +23,18 @@ public class SettlementPointController {
     @Autowired
     private SettlementPointRepository settlementPointRepository;
 
+    private RequestEncryptor requestEncryptor;
+
     @PostMapping("/add")
-    public ResponseEntity<String> save(@RequestBody SettlementPointDTO settlementPointDTO) {
+    public ResponseEntity<String> save(@RequestBody SettlementPointDTO settlementPointDTO) throws Exception {
+        SettlementPoint settlementPoint = new SettlementPoint();
+        if (settlementPoint.getPointId() == null) {
+            return ResponseEntity.badRequest().body("SettlementPoint not found");
+        }
+        RequestEncryptor encryptor = new RequestEncryptor();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = objectMapper.writeValueAsString(settlementPointDTO);
+        String encryptedRequestBody = encryptor.encrypt(requestBody);
         settlementPointDTO.setCreated(LocalDate.now());
         settlementPointDTO.setUpdated(LocalDate.now());
         UUID pointId = settlementPointService.save(settlementPointDTO);

@@ -1,0 +1,17 @@
+POST http://localhost:8080/api/operations
+Content-Type: application/json
+UUID: 811cd6aa-a9ec-4174-949e-9a94457f33b3
+
+{
+  "operations": [{
+    "pointId": "811cd6aa-a9ec-4174-949e-9a94457f33b3",
+    "sum": "10000",
+    "currency": "KGS",
+    "commission": "0",
+    "supplierTin": "sad",
+    "supplierName": "sad",
+    "nonresidentName": "World of Tanks",
+    "paymentDetails": "Платеж по договору №1766 от 05.06.2021",
+    "paymentType": "0"
+  }]
+}
